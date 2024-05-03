@@ -38,6 +38,7 @@
                     <th>Stop Date</th>
                     <th>Actual Speed</th>
                     <th>Posted Speed</th>
+                    <th>MPH Over</th>
                 </tr>
             </thead>
             <tbody>
@@ -46,6 +47,7 @@
                     <td>{{ ticket.stop_date }}</td>
                     <td>{{ ticket.actual_speed }}</td>
                     <td>{{ ticket.posted_speed }}</td>
+                    <td>{{ ticket.actual_speed - ticket.posted_speed }}</td>
                 </tr>
             </tbody>
         </table>
@@ -62,7 +64,7 @@
             },
             computed: {
                 ticketsOver25: function() {
-                    return this.tickets.filter(ticket => ticket.actual_speed > 25);
+                    return this.tickets.filter(ticket => ticket.actual_speed - ticket.posted_speed >= 25);
                 }
             },
             mounted() {
